@@ -1,5 +1,6 @@
 package sapalomera;
 
+import sapalomera.controller.EndPointController;
 import sapalomera.controller.MenusController;
 import sapalomera.view.Vista;
 
@@ -8,5 +9,6 @@ public class Main {
         Vista.mostrarMenuPrincipal();
         MenusController.scanOpcio(7);
         MenusController.switchPrincipal();
+        EndPointController.llegirGson();
     }
 }
