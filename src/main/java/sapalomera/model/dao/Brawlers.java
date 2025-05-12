@@ -3,20 +3,26 @@ package sapalomera.model.dao;
 public class Brawlers {
     private String id;
     private String nom;
-    private String descripcio;
-    private String categoria;
-    private String tipus;
+    private int gadgetID;
+    private int gadget2ID;
+    private int starpower1ID;
+    private int starpower2ID;
 
-    public Brawlers(String id, String nom, String descripcio, String categoria, String tipus) {
+    public Brawlers(String id, String nom, int gadgetID, int gadget2ID, int starpower1ID, int starpower2ID) {
         this.id = id;
         this.nom = nom;
-        this.descripcio = descripcio;
-        this.categoria = categoria;
-        this.tipus = tipus;
+        this.gadgetID = gadgetID;
+        this.gadget2ID = gadget2ID;
+        this.starpower1ID = starpower1ID;
+        this.starpower2ID = starpower2ID;
     }
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNom() {
@@ -27,27 +33,35 @@ public class Brawlers {
         this.nom = nom;
     }
 
-    public String getDescripcio() {
-        return descripcio;
+    public int getGadgetID() {
+        return gadgetID;
     }
 
-    public void setDescripcio(String descripcio) {
-        this.descripcio = descripcio;
+    public void setGadgetID(int gadgetID) {
+        this.gadgetID = gadgetID;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public int getGadget2ID() {
+        return gadget2ID;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setGadget2ID(int gadget2ID) {
+        this.gadget2ID = gadget2ID;
     }
 
-    public String getTipus() {
-        return tipus;
+    public int getStarpower1ID() {
+        return starpower1ID;
     }
 
-    public void setTipus(String tipus) {
-        this.tipus = tipus;
+    public void setStarpower1ID(int starpower1ID) {
+        this.starpower1ID = starpower1ID;
+    }
+
+    public int getStarpower2ID() {
+        return starpower2ID;
+    }
+
+    public void setStarpower2ID(int starpower2ID) {
+        this.starpower2ID = starpower2ID;
     }
 }

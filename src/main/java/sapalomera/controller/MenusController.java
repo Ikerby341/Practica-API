@@ -26,7 +26,13 @@ public class MenusController {
                 scan.nextLine();
                 break;
             case 2:
-
+                try {
+                    Vista.mostrarMissatge(EndPointController.llegirGsonBrawlify());
+                } catch (Exception e){
+                    Vista.mostrarMissatge("Error al llistar els brawlers: " + e.getMessage());
+                }
+                Vista.mostrarMissatge("Pulsa enter per continuar...");
+                scan.nextLine();
                 break;
             case 3:
                 try {
@@ -51,7 +57,13 @@ public class MenusController {
 
                 break;
             case 5:
-
+                try {
+                    Vista.mostrarMissatge(EndPointController.llegirGsonBrawlStars());
+                } catch (Exception e){
+                    Vista.mostrarMissatge("Error al llistar els brawlers: " + e.getMessage());
+                }
+                Vista.mostrarMissatge("Pulsa enter per continuar...");
+                scan.nextLine();
                 break;
             case 6:
 
