@@ -8,7 +8,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    private static final String rutaDB = "BBDD_PracticaAPI.db";
+    private static final String rutaDB = "BrawlStars.db";
+
     private static Connection connexio;
 
     /**
@@ -17,6 +18,7 @@ public class DBConnection {
      */
     public static Connection connectar() {
         connexio = null;
+
         File dbFile = new File(rutaDB);
 
         if (dbFile.exists()) {

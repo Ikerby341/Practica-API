@@ -1,8 +1,9 @@
 package sapalomera.controller;
 
+import sapalomera.model.dao.SQLite.SQLiteBrawlersDAO;
 import sapalomera.view.Vista;
-
 import java.util.Scanner;
+import java.sql.Connection;
 
 /**
  * Classe per separar els switch de la classe principal
@@ -11,18 +12,40 @@ public class MenusController {
     public static Scanner scan = new Scanner(System.in);
     static int opcio;
 
-    public static void switchPrincipal(){
+    public static void switchPrincipal(Connection conexio){
         switch (opcio) {
             case 0:
                 break;
             case 1:
-
+                try {
+                    Vista.mostrarMissatge(SQLiteBrawlersDAO.llistarTot(conexio));
+                } catch (Exception e){
+                    Vista.mostrarMissatge("Error al llistar els brawlers: " + e.getMessage());
+                }
+                Vista.mostrarMissatge("Pulsa enter per continuar...");
+                scan.nextLine();
                 break;
             case 2:
 
                 break;
             case 3:
+                try {
+                    Vista.mostrarMissatge("Digues la ID del Brawler");
+                    int ID = scan.nextInt();
+                    scan.nextLine();
+                    Vista.mostrarMissatge(EndPointController.llistarBrawlerID(ID));
+                    Vista.mostrarMissatge("Vols modificar aquestes dades? (s o n)");
+                    String sn = scan.nextLine();
+                    if (sn.equals("s")){
 
+                    }
+                    else break;
+
+                } catch (Exception e){
+                    Vista.mostrarMissatge("Error al llistar els brawlers: " + e.getMessage());
+                }
+                Vista.mostrarMissatge("Pulsa enter per continuar...");
+                scan.nextLine();
                 break;
             case 4:
 
@@ -36,25 +59,7 @@ public class MenusController {
             case 7:
                 Vista.mostrarSubMenuCopia();
                 scanOpcio(2);
-                switchCopia();
                 break;
-        }
-    }
-
-    public static void switchCopia(){
-        switch (opcio) {
-            case 0:
-                Vista.mostrarMenuPrincipal();
-                scanOpcio(7);
-                switchPrincipal();
-                break;
-            case 1:
-                // Accions per a valor2
-                break;
-            case 2:
-                // Accions per a valor3
-                break;
-
         }
     }
 
