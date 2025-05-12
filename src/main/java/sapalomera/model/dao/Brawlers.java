@@ -1,27 +1,29 @@
 package sapalomera.model.dao;
 
 public class Brawlers {
-    private String id;
+    private int id;
     private String nom;
+    private int rarityID;
     private int gadgetID;
     private int gadget2ID;
     private int starpower1ID;
     private int starpower2ID;
 
-    public Brawlers(String id, String nom, int gadgetID, int gadget2ID, int starpower1ID, int starpower2ID) {
-        this.id = id;
-        this.nom = nom;
-        this.gadgetID = gadgetID;
-        this.gadget2ID = gadget2ID;
-        this.starpower1ID = starpower1ID;
+    public Brawlers(int starpower2ID, int starpower1ID, int gadget2ID, int gadgetID, int rarityID, String nom, int id) {
         this.starpower2ID = starpower2ID;
+        this.starpower1ID = starpower1ID;
+        this.gadget2ID = gadget2ID;
+        this.gadgetID = gadgetID;
+        this.rarityID = rarityID;
+        this.nom = nom;
+        this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -64,4 +66,8 @@ public class Brawlers {
     public void setStarpower2ID(int starpower2ID) {
         this.starpower2ID = starpower2ID;
     }
+
+    public int getRarityID() { return rarityID; }
+
+    public void setRarityID(int rarityID) { this.rarityID = rarityID; }
 }
