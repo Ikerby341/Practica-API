@@ -1,5 +1,6 @@
 package sapalomera;
 
+import sapalomera.controller.EndPointController;
 import sapalomera.controller.MenusController;
 import sapalomera.model.dao.DBConnection;
 import sapalomera.view.Vista;
@@ -14,7 +15,7 @@ public class Main {
         }
 
         Vista.mostrarMenuPrincipal();
-        MenusController.scanOpcio(7);
+        MenusController.scanOpcio(8);
         MenusController.switchPrincipal(conexio);
 
     }

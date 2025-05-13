@@ -1,27 +1,26 @@
 package sapalomera.model.dao;
 
-public class Gadgets {
-    private int id;
-    private String nom;
+import com.google.gson.annotations.SerializedName;
 
-    public Gadgets(int id, String nom) {
+public class Gadgets {
+    @SerializedName("id")
+    private int id;
+
+    @SerializedName("name")
+    private String name;
+
+    // Constructor, Getters y Setters
+    public Gadgets(int id, String name) {
         this.id = id;
-        this.nom = nom;
+        this.name = name;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
+    public String getName() {
+        return name;
     }
 }
+

@@ -35,6 +35,7 @@ public class Vista {
         Vista.mostrarMissatge("5. Mostrar contingut JSON");
         Vista.mostrarMissatge("6. Modificar personatge segons el JSON");
         Vista.mostrarMissatge("7. Còpia total de les dades obtingudes del JSON");
+        Vista.mostrarMissatge("8. Proves variades");
     }
 
     /**

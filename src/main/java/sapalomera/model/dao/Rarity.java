@@ -1,38 +1,37 @@
 package sapalomera.model.dao;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Rarity {
+    @SerializedName("id")
     private int id;
-    private String nom;
+
+    @SerializedName("name")
+    private String name;
+
+    @SerializedName("color")
     private String color;
 
-    public Rarity(int id, String nom, String color) {
+    public Rarity(int id, String name, String color) {
         this.id = id;
-        this.nom = nom;
+        this.name = name;
         this.color = color;
     }
 
+    // Constructor vacío requerido para Gson
+    public Rarity() {
+    }
+
+    // Getters
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
+    public String getName() {
+        return name;
     }
 
     public String getColor() {
         return color;
     }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
 }

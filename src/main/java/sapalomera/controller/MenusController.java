@@ -1,5 +1,7 @@
 package sapalomera.controller;
 
+import sapalomera.Main;
+import sapalomera.model.dao.DBConnection;
 import sapalomera.model.dao.SQLite.SQLiteBrawlersDAO;
 import sapalomera.view.Vista;
 import java.util.Scanner;
@@ -24,53 +26,72 @@ public class MenusController {
                 }
                 Vista.mostrarMissatge("Pulsa enter per continuar...");
                 scan.nextLine();
+                toranaramostrarmenu();
                 break;
             case 2:
                 try {
-                    Vista.mostrarMissatge(EndPointController.llegirGsonBrawlify());
+                    EndPointController.convertirObjectesL(EndPointController.llegirGsonBrawlify());
                 } catch (Exception e){
                     Vista.mostrarMissatge("Error al llistar els brawlers: " + e.getMessage());
                 }
                 Vista.mostrarMissatge("Pulsa enter per continuar...");
                 scan.nextLine();
+                toranaramostrarmenu();
                 break;
             case 3:
                 try {
                     Vista.mostrarMissatge("Digues la ID del Brawler");
                     int ID = scan.nextInt();
                     scan.nextLine();
-                    Vista.mostrarMissatge(EndPointController.llistarBrawlerID(ID));
+                    EndPointController.convertirObjecte(EndPointController.llistarBrawlerID(ID));
                     Vista.mostrarMissatge("Vols modificar aquestes dades? (s o n)");
                     String sn = scan.nextLine();
                     if (sn.equals("s")){
 
+                        toranaramostrarmenu();
                     }
-                    else break;
+                    else {
+                        toranaramostrarmenu();
+                        break;
+                    }
 
                 } catch (Exception e){
                     Vista.mostrarMissatge("Error al llistar els brawlers: " + e.getMessage());
                 }
                 Vista.mostrarMissatge("Pulsa enter per continuar...");
                 scan.nextLine();
+                toranaramostrarmenu();
                 break;
             case 4:
-
+                toranaramostrarmenu();
                 break;
             case 5:
                 try {
-                    Vista.mostrarMissatge(EndPointController.llegirGsonBrawlStars());
+                    EndPointController.convertirObjectesI(EndPointController.llegirGsonBrawlStars());
                 } catch (Exception e){
                     Vista.mostrarMissatge("Error al llistar els brawlers: " + e.getMessage());
                 }
                 Vista.mostrarMissatge("Pulsa enter per continuar...");
                 scan.nextLine();
+                toranaramostrarmenu();
                 break;
             case 6:
-
+                toranaramostrarmenu();
                 break;
             case 7:
                 Vista.mostrarSubMenuCopia();
                 scanOpcio(2);
+                toranaramostrarmenu();
+                break;
+            case 8:
+                try {
+                    EndPointController.convertirObjectesL(EndPointController.llegirGsonBrawlify());
+                } catch (Exception e){
+                    Vista.mostrarMissatge("Error al llistar els brawlers: " + e.getMessage());
+                }
+                Vista.mostrarMissatge("Pulsa enter per continuar...");
+                scan.nextLine();
+                toranaramostrarmenu();
                 break;
         }
     }
@@ -88,5 +109,12 @@ public class MenusController {
             opcio = scan.nextInt();
             scan.nextLine();
         }
+    }
+
+    public static void toranaramostrarmenu(){
+        Connection conexio = DBConnection.getConnexio();
+        Vista.mostrarMenuPrincipal();
+        MenusController.scanOpcio(8);
+        MenusController.switchPrincipal(conexio);
     }
 }

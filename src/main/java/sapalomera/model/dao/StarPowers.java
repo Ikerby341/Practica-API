@@ -1,27 +1,25 @@
 package sapalomera.model.dao;
 
+import com.google.gson.annotations.SerializedName;
+
 public class StarPowers {
-    private int id;
-    private String nom;
+        @SerializedName("id")
+        private int id;
 
-    public StarPowers(int id, String nom) {
-        this.id = id;
-        this.nom = nom;
-    }
+        @SerializedName("name")
+        private String name;
 
-    public int getId() {
-        return id;
-    }
+        // Constructor, Getters y Setters
+        public StarPowers(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+        public int getId() {
+            return id;
+        }
 
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+        public String getName() {
+            return name;
+        }
 }
