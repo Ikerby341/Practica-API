@@ -4,7 +4,7 @@
 
 ## ~ EXPLICACIÓ API ` 📡 `
 > [!WARNING]
-> Has d'actualizar la variable [APIKEY](https://github.com/Ikerby341/Practica-API/blob/main/src/main/java/sapalomera/controller/EndPointController.java#L17)
+> Has d'actualizar la variable [APIKEY](https://github.com/Ikerby341/Practica-API/blob/main/src/main/java/sapalomera/controller/EndPointController.java#L21)
 
 
 - 📂 [EndpointController.java](https://github.com/Ikerby341/Practica-API/blob/main/src/main/java/sapalomera/controller/EndPointController.java) <br/>
