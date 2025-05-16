@@ -2,6 +2,8 @@ package sapalomera.model.dao;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 public class Rarity {
     @SerializedName("id")
     private int id;
@@ -33,5 +35,18 @@ public class Rarity {
 
     public String getColor() {
         return color;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Rarity rarity = (Rarity) obj;
+        return id == rarity.id && name.equals(rarity.name) && color.equals(rarity.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, color);
     }
 }

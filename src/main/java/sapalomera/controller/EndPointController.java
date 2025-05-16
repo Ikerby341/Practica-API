@@ -2,6 +2,9 @@ package sapalomera.controller;
 
 import com.google.gson.*;
 import sapalomera.model.dao.Brawlers;
+import sapalomera.model.dao.Gadgets;
+import sapalomera.model.dao.Rarity;
+import sapalomera.model.dao.StarPowers;
 import sapalomera.view.Vista;
 
 import java.io.*;
@@ -9,6 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class EndPointController {
@@ -182,4 +186,69 @@ public class EndPointController {
         return devolucio;
 
     }
+
+    public static ArrayList<Rarity> obtenirRarity(String json) {
+        Gson gson = new Gson();
+        JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
+        JsonArray brawlersArray = jsonObject.getAsJsonArray("list");
+
+        // Utilizem un HashSet per evitar valors duplicats
+        HashSet<Rarity> rarezasSet = new HashSet<>();
+
+        for (JsonElement element : brawlersArray) {
+            JsonObject brawlerObject = element.getAsJsonObject();
+            Rarity rarity = gson.fromJson(brawlerObject.getAsJsonObject("rarity"), Rarity.class);
+
+            rarezasSet.add(rarity);
+        }
+
+        return new ArrayList<>(rarezasSet);
+    }
+
+    public static ArrayList<Gadgets> obtenirGadgets(String json) {
+        Gson gson = new Gson();
+        JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
+        JsonArray brawlersArray = jsonObject.getAsJsonArray("list");
+        ArrayList<Gadgets> gadgets = new ArrayList<>();
+
+        for (JsonElement element : brawlersArray) {
+            JsonArray gadgetsArray = element.getAsJsonObject().getAsJsonArray("gadgets");
+
+            for (JsonElement gadgetElement : gadgetsArray) {
+                Gadgets gadget = gson.fromJson(gadgetElement, Gadgets.class);
+
+                // Evitar duplicats
+                if (!gadgets.contains(gadget)) {
+                    gadgets.add(gadget);
+                }
+            }
+        }
+
+        return gadgets;
+    }
+
+
+    public static ArrayList<StarPowers> obtenirStarPowers(String json) {
+        Gson gson = new Gson();
+        JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
+        JsonArray brawlersArray = jsonObject.getAsJsonArray("list");
+        ArrayList<StarPowers> starPowers = new ArrayList<>();
+
+        for (JsonElement element : brawlersArray) {
+            JsonArray starPowersArray = element.getAsJsonObject().getAsJsonArray("starPowers");
+
+            for (JsonElement starPowerElement : starPowersArray) {
+                StarPowers starPower = gson.fromJson(starPowerElement, StarPowers.class);
+
+                // Evitar duplicats
+                if (!starPowers.contains(starPower)) {
+                    starPowers.add(starPower);
+                }
+            }
+        }
+
+        return starPowers;
+    }
+
+
 }

@@ -1,9 +1,11 @@
 package sapalomera.controller;
 
 import sapalomera.Main;
-import sapalomera.model.dao.Brawlers;
-import sapalomera.model.dao.DBConnection;
+import sapalomera.model.dao.*;
 import sapalomera.model.dao.SQLite.SQLiteBrawlersDAO;
+import sapalomera.model.dao.SQLite.SQLiteGadgetsDAO;
+import sapalomera.model.dao.SQLite.SQLiteRarityDAO;
+import sapalomera.model.dao.SQLite.SQLiteStarPowersDAO;
 import sapalomera.view.Vista;
 
 import java.io.FileNotFoundException;
@@ -65,11 +67,7 @@ public class MenusController {
                         Vista.mostrarMissatge("Que vols posar?");
                         String comoquiero = scan.nextLine();
                         SQLiteBrawlersDAO.actualitzar(conexio, ID, quequiero, comoquiero);
-                        toranaramostrarmenu();
-                    }
-                    else {
-                        toranaramostrarmenu();
-                        break;
+
                     }
 
                 } catch (Exception e){
@@ -149,6 +147,12 @@ public class MenusController {
                 try {
                     ArrayList<Brawlers> brawlersArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.convertirObjectesL(EndPointController.llegirGsonBrawlify())));
                     SQLiteBrawlersDAO.crearParcial(conexio, brawlersArrayList);
+                    ArrayList<Rarity> rarityArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.obtenirRarity(EndPointController.llegirGsonBrawlify())));
+                    SQLiteRarityDAO.crearParcial(conexio, rarityArrayList);
+                    ArrayList<Gadgets> gadgetsArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.obtenirGadgets(EndPointController.llegirGsonBrawlify())));
+                    SQLiteGadgetsDAO.crearParcial(conexio, gadgetsArrayList);
+                    ArrayList<StarPowers> starPowersArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.obtenirStarPowers(EndPointController.llegirGsonBrawlify())));
+                    SQLiteStarPowersDAO.crearParcial(conexio, starPowersArrayList);
                     Vista.mostrarMissatge("Pulsa enter per continuar...");
                     scan.nextLine();
                 } catch (Exception e){
@@ -160,6 +164,12 @@ public class MenusController {
                 try {
                     ArrayList<Brawlers> brawlersArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.convertirObjectesL(EndPointController.llegirGsonBrawlify())));
                     SQLiteBrawlersDAO.crearTotal(conexio, brawlersArrayList);
+                    ArrayList<Rarity> rarityArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.obtenirRarity(EndPointController.llegirGsonBrawlify())));
+                    SQLiteRarityDAO.crearTotal(conexio, rarityArrayList);
+                    ArrayList<Gadgets> gadgetsArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.obtenirGadgets(EndPointController.llegirGsonBrawlify())));
+                    SQLiteGadgetsDAO.crearTotal(conexio, gadgetsArrayList);
+                    ArrayList<StarPowers> starPowersArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.obtenirStarPowers(EndPointController.llegirGsonBrawlify())));
+                    SQLiteStarPowersDAO.crearTotal(conexio, starPowersArrayList);
                     Vista.mostrarMissatge("Pulsa enter per continuar...");
                     scan.nextLine();
                 } catch (Exception e){

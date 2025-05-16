@@ -4,7 +4,11 @@ import sapalomera.model.dao.Brawlers;
 import sapalomera.view.Vista;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import static java.time.LocalDate.now;
 
 public class SQLiteBrawlersDAO {
     public static void crearTotal(Connection con, ArrayList<Brawlers> o) {
@@ -36,7 +40,7 @@ public class SQLiteBrawlersDAO {
                 }
             }
         } else {
-            throw new IllegalArgumentException("L'objecte proporcionat no es una instancia d'Escaladors.");
+            throw new IllegalArgumentException("L'objecte proporcionat no es una instancia de Brawlers.");
         }
     }
 
@@ -69,7 +73,7 @@ public class SQLiteBrawlersDAO {
                 }
 
             } else {
-                throw new IllegalArgumentException("L'objecte proporcionat no es una instancia d'Escaladors.");
+                throw new IllegalArgumentException("L'objecte proporcionat no es una instancia de Brawlers.");
             }
         }
     }
@@ -104,7 +108,10 @@ public class SQLiteBrawlersDAO {
 
     public static void actualitzar(Connection con,int id, String quequiero, String comoquiero) {
         try (Statement stmt = con.createStatement()) {
-            String sql = "UPDATE brawlers SET " + quequiero + " = '" + comoquiero + "' WHERE brawler_id = " + id;
+            LocalDate avui = LocalDate.now();
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            String resultat = avui.format(format);
+            String sql = "UPDATE brawlers SET " + quequiero.toLowerCase() + " = '" + comoquiero + "', data_modificacio = '" + resultat + "' WHERE brawler_id = " + id;
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             throw new RuntimeException("Error al actualitzar la base de dades", e);
