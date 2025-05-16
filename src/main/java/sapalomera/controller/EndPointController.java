@@ -4,17 +4,17 @@ import com.google.gson.*;
 import sapalomera.model.dao.Brawlers;
 import sapalomera.view.Vista;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class EndPointController {
     public static Scanner scan = new Scanner(System.in);
     static Gson gson = new Gson();
-
+    static String apikey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImVmNmNmOTVmLTQ4MWItNDM1YS05Yzk2LTY3ODU5MTZkOWU4MyIsImlhdCI6MTc0NzM4MTM5MCwic3ViIjoiZGV2ZWxvcGVyL2I1NGZlNWMzLTFiN2MtYTJkOC02ZmFkLWNlZTJhOTkyYTlkNiIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiODUuNTAuMTYwLjQzIl0sInR5cGUiOiJjbGllbnQifV19.FD8yVxklHugve06aAIQW5jOmmJ2LCLv16LeM26BMLmZDI_a5qMh_5Iqg4w0s5C8MZX4jlobCWd72ZYLn6AmR4A";
     public static String llegirGsonBrawlify() {
         try {
             URL url = new URL("https://api.brawlify.com/v1/brawlers");
@@ -37,7 +37,6 @@ public class EndPointController {
     }
 
     public static String llegirGsonBrawlStars() {
-        String apikey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImVjM2UwYmU2LTYwNWItNDlmMC05YTZkLWEyYmRiOGUwY2RmNSIsImlhdCI6MTc0Njc4MjA0OCwic3ViIjoiZGV2ZWxvcGVyL2E2YjA2OTRlLTJkZjQtZmJmYy1jYjFjLTc5ZDFlZTZlNGMxZiIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiODUuMTkyLjczLjQzIl0sInR5cGUiOiJjbGllbnQifV19.LraSBBqQRD8GDsb9QO9YRN2XL0Z-lejeReCANhLXWNca69zULDcDOyaCaxespDAZyF3ExJSzMuhIDIjgZ3_mcA";
         try {
             URL url = new URL("https://api.brawlstars.com/v1/brawlers");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -61,8 +60,6 @@ public class EndPointController {
     }
 
     public static String llistarBrawlerID(int ID) {
-        String apikey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImVjM2UwYmU2LTYwNWItNDlmMC05YTZkLWEyYmRiOGUwY2RmNSIsImlhdCI6MTc0Njc4MjA0OCwic3ViIjoiZGV2ZWxvcGVyL2E2YjA2OTRlLTJkZjQtZmJmYy1jYjFjLTc5ZDFlZTZlNGMxZiIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiODUuMTkyLjczLjQzIl0sInR5cGUiOiJjbGllbnQifV19.LraSBBqQRD8GDsb9QO9YRN2XL0Z-lejeReCANhLXWNca69zULDcDOyaCaxespDAZyF3ExJSzMuhIDIjgZ3_mcA";
-
         try {
             URL url = new URL("https://api.brawlstars.com/v1/brawlers/" + ID);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -109,10 +106,11 @@ public class EndPointController {
         }
     }
 
-    public static void convertirObjectesL(String json) {
+    public static ArrayList<Brawlers> convertirObjectesL(String json) {
         Gson gson = new Gson();
         JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
         JsonArray brawlersArray = jsonObject.getAsJsonArray("list");
+        ArrayList<Brawlers> brawlersList = new ArrayList<>();
 
         for (JsonElement element : brawlersArray) {
             try {
@@ -125,12 +123,14 @@ public class EndPointController {
                         " | Gadget2ID: " + brawler.getGadget2ID() +
                         " | StarPower1ID: " + brawler.getStarpower1ID() +
                         " | StarPower2ID: " + brawler.getStarpower2ID());
+                brawlersList.add(brawler);
             } catch (JsonSyntaxException e) {
                 Vista.mostrarMissatge("Error al deserialitzar el brawler: " + e.getMessage());
             } catch (NullPointerException e) {
                 Vista.mostrarMissatge("Error: un dels camps es null.");
             }
         }
+        return brawlersList;
     }
 
     public static void convertirObjecte(String json) {
@@ -148,4 +148,38 @@ public class EndPointController {
 
     }
 
+    public static void crearJson(String json) throws FileNotFoundException {
+        File file = new File("brawlers.json");
+        PrintStream writer = new PrintStream(file);
+        boolean isWriting = false;
+
+        try {
+            file.createNewFile();
+            writer.println(json);
+            isWriting = true;
+            Vista.mostrarMissatge("Fitxer creat correctament: " + file.getAbsolutePath());
+        } catch (IOException e) {
+            Vista.mostrarMissatge("Error al crear el fitxer: " + e.getMessage());
+        }
+
+        if (isWriting) {
+            isWriting = false;
+            writer.close();
+        }
+
+    }
+
+    public static String llegirJson() throws FileNotFoundException {
+        File file = new File("brawlers.json");
+        Scanner reader = new Scanner(file);
+        String devolucio = "";
+
+        while (reader.hasNextLine()) {
+            devolucio = reader.nextLine();
+        }
+
+        reader.close();
+        return devolucio;
+
+    }
 }
