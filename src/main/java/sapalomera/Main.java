@@ -1,6 +1,7 @@
 package sapalomera;
 
 import sapalomera.controller.EndPointController;
+import sapalomera.controller.JsonController;
 import sapalomera.controller.MenusController;
 import sapalomera.model.dao.DBConnection;
 import sapalomera.view.Vista;
@@ -16,7 +17,7 @@ public class Main {
             return;
         }
         try {
-            EndPointController.crearJson(EndPointController.llegirGsonBrawlStars());
+            JsonController.crearJson(EndPointController.llegirGsonBrawlStars());
             Vista.mostrarMenuPrincipal();
             MenusController.scanOpcio(8);
             MenusController.switchPrincipal(conexio);

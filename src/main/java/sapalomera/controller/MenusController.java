@@ -88,7 +88,7 @@ public class MenusController {
                 break;
             case 5:
                 try {
-                    EndPointController.convertirObjectesI(EndPointController.llegirJson());
+                    JsonController.convertirObjectesI(JsonController.llegirJson());
                 } catch (Exception e){
                     Vista.mostrarMissatge("Error al llistar els brawlers: " + e.getMessage());
                 }
@@ -109,7 +109,7 @@ public class MenusController {
                         tornarAMostrarMenu();
                         break;
                     }
-                    EndPointController.llistarBrawlerIDJ(EndPointController.llegirJson(),ID);
+                    JsonController.llistarBrawlerIDJ(JsonController.llegirJson(),ID);
                     Vista.mostrarMissatge("Vols modificar aquestes dades? (s o n)");
                     String sn = scan.nextLine();
                     if (sn.trim().equalsIgnoreCase("s")){
@@ -137,7 +137,7 @@ public class MenusController {
             case 8:
                 Vista.mostrarMissatge(EndPointController.llegirGsonBrawlStars());
                 try {
-                    EndPointController.crearJson(EndPointController.llegirGsonBrawlStars());
+                    JsonController.crearJson(EndPointController.llegirGsonBrawlStars());
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 }
@@ -221,11 +221,11 @@ public class MenusController {
                 break;
             case 1:
                 try {
-                    ArrayList<Brawlers> brawlersArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.convertirObjectesI(EndPointController.llegirJson())));
+                    ArrayList<Brawlers> brawlersArrayList = new ArrayList<>(Objects.requireNonNull(JsonController.convertirObjectesI(JsonController.llegirJson())));
                     SQLiteBrawlersDAO.crearParcialJson(conexio, brawlersArrayList);
-                    ArrayList<Gadgets> gadgetsArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.obtenirGadgetsI(EndPointController.llegirJson())));
+                    ArrayList<Gadgets> gadgetsArrayList = new ArrayList<>(Objects.requireNonNull(JsonController.obtenirGadgetsI(JsonController.llegirJson())));
                     SQLiteGadgetsDAO.crearParcial(conexio, gadgetsArrayList);
-                    ArrayList<StarPowers> starPowersArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.obtenirStarPowersI(EndPointController.llegirJson())));
+                    ArrayList<StarPowers> starPowersArrayList = new ArrayList<>(Objects.requireNonNull(JsonController.obtenirStarPowersI(JsonController.llegirJson())));
                     SQLiteStarPowersDAO.crearParcial(conexio, starPowersArrayList);
                     Vista.mostrarMissatge("Pulsa enter per continuar...");
                     scan.nextLine();
@@ -236,11 +236,11 @@ public class MenusController {
                 break;
             case 2:
                 try {
-                    ArrayList<Brawlers> brawlersArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.convertirObjectesI(EndPointController.llegirJson())));
+                    ArrayList<Brawlers> brawlersArrayList = new ArrayList<>(Objects.requireNonNull(JsonController.convertirObjectesI(JsonController.llegirJson())));
                     SQLiteBrawlersDAO.crearTotalJson(conexio, brawlersArrayList);
-                    ArrayList<Gadgets> gadgetsArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.obtenirGadgetsI(EndPointController.llegirJson())));
+                    ArrayList<Gadgets> gadgetsArrayList = new ArrayList<>(Objects.requireNonNull(JsonController.obtenirGadgetsI(JsonController.llegirJson())));
                     SQLiteGadgetsDAO.crearTotal(conexio, gadgetsArrayList);
-                    ArrayList<StarPowers> starPowersArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.obtenirStarPowersI(EndPointController.llegirJson())));
+                    ArrayList<StarPowers> starPowersArrayList = new ArrayList<>(Objects.requireNonNull(JsonController.obtenirStarPowersI(JsonController.llegirJson())));
                     SQLiteStarPowersDAO.crearTotal(conexio, starPowersArrayList);
                     Vista.mostrarMissatge("Pulsa enter per continuar...");
                     scan.nextLine();
