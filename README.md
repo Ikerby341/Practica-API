@@ -13,7 +13,7 @@ Gestionem la creació del [JSON](https://github.com/Ikerby341/Practica-API/blob/
 En conclusió, obtenim les dades de la APi i després ho transformem a Objecte per poder mostrar les dades.
 ## ~ EXPLICACIÓ JDBC ` 🛢️ `
 > [!NOTE]
-> La nostre base de dades está amb [SQLite](https://github.com/Ikerby341/Practica-API/blob/main/BrawlStars.db), perqué és més sencill de gestionar i perqué ara mateix aquest programa no necesita<br/>
+> La nostre base de dades está amb [SQLite](https://github.com/Ikerby341/Practica-API/blob/main/BrawlStars.db), perqué és més sencill de gestionar i perqué ara mateix aquest programa no necesita
 treballar sobre moltes conexions i consultes a la vegada, llavors no necesitem MySQL u otra base de dades per aixó.<br/>
 
 
