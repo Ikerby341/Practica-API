@@ -1,5 +1,9 @@
 package sapalomera.controller;
 
+import sapalomera.model.Brawlers;
+import sapalomera.model.Gadgets;
+import sapalomera.model.Rarity;
+import sapalomera.model.StarPowers;
 import sapalomera.model.dao.*;
 import sapalomera.model.dao.SQLite.SQLiteBrawlersDAO;
 import sapalomera.model.dao.SQLite.SQLiteGadgetsDAO;

@@ -1,6 +1,6 @@
 package sapalomera.model.dao.SQLite;
 
-import sapalomera.model.dao.Gadgets;
+import sapalomera.model.Gadgets;
 import sapalomera.view.Vista;
 
 import java.sql.*;

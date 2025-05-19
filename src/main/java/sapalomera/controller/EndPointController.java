@@ -1,10 +1,10 @@
 package sapalomera.controller;
 
 import com.google.gson.*;
-import sapalomera.model.dao.Brawlers;
-import sapalomera.model.dao.Gadgets;
-import sapalomera.model.dao.Rarity;
-import sapalomera.model.dao.StarPowers;
+import sapalomera.model.Brawlers;
+import sapalomera.model.Gadgets;
+import sapalomera.model.Rarity;
+import sapalomera.model.StarPowers;
 import sapalomera.view.Vista;
 
 import java.io.*;

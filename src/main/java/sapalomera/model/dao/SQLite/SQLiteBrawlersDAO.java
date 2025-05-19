@@ -1,6 +1,6 @@
 package sapalomera.model.dao.SQLite;
 
-import sapalomera.model.dao.Brawlers;
+import sapalomera.model.Brawlers;
 import sapalomera.view.Vista;
 
 import java.sql.*;

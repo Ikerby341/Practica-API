@@ -1,6 +1,6 @@
 package sapalomera.model.dao.SQLite;
 
-import sapalomera.model.dao.StarPowers;
+import sapalomera.model.StarPowers;
 import sapalomera.view.Vista;
 
 import java.sql.*;

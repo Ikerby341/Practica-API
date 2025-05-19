@@ -1,4 +1,4 @@
-package sapalomera.model.dao;
+package sapalomera.model;
 
 import com.google.gson.annotations.SerializedName;
 

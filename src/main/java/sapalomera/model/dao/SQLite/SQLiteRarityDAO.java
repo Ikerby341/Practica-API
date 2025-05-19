@@ -1,6 +1,6 @@
 package sapalomera.model.dao.SQLite;
 
-import sapalomera.model.dao.Rarity;
+import sapalomera.model.Rarity;
 import sapalomera.view.Vista;
 
 import java.sql.*;
