@@ -94,11 +94,41 @@ public class MenusController {
                 toranaramostrarmenu();
                 break;
             case 6:
+                try {
+                    Vista.mostrarMissatge("Digues la ID del Brawler");
+                    int ID = scan.nextInt();
+                    scan.nextLine();
+                    int existeix = SQLiteBrawlersDAO.existeix(conexio, ID);
+                    if (existeix == 0) {
+                        Vista.mostrarMissatge("No existeix el brawler amb ID a la BBDD: " + ID);
+                        Vista.mostrarMissatge("Pulsa enter per continuar...");
+                        scan.nextLine();
+                        toranaramostrarmenu();
+                        break;
+                    }
+                    EndPointController.llistarBrawlerIDJ(EndPointController.llegirJson(),ID);
+                    Vista.mostrarMissatge("Vols modificar aquestes dades? (s o n)");
+                    String sn = scan.nextLine();
+                    if (sn.trim().equalsIgnoreCase("s")){
+                        Vista.mostrarMissatge("Que vols modificar?");
+                        String quequiero = scan.nextLine();
+                        Vista.mostrarMissatge("Que vols posar?");
+                        String comoquiero = scan.nextLine();
+                        SQLiteBrawlersDAO.actualitzar(conexio, ID, quequiero, comoquiero);
+
+                    }
+
+                } catch (Exception e){
+                    Vista.mostrarMissatge("Error al llistar els brawlers: " + e.getMessage());
+                }
+                Vista.mostrarMissatge("Pulsa enter per continuar...");
+                scan.nextLine();
                 toranaramostrarmenu();
                 break;
             case 7:
                 Vista.mostrarSubMenuCopia();
                 scanOpcio(2);
+                switchCopiaJson();
                 toranaramostrarmenu();
                 break;
             case 8:
@@ -156,7 +186,7 @@ public class MenusController {
                     Vista.mostrarMissatge("Pulsa enter per continuar...");
                     scan.nextLine();
                 } catch (Exception e){
-                    Vista.mostrarMissatge("Error al llistar els brawlers: " + e.getMessage());
+                    Vista.mostrarMissatge("Error al copiar les taules: " + e.getMessage());
                 }
                 toranaramostrarmenu();
                 break;
@@ -173,7 +203,46 @@ public class MenusController {
                     Vista.mostrarMissatge("Pulsa enter per continuar...");
                     scan.nextLine();
                 } catch (Exception e){
-                    Vista.mostrarMissatge("Error al llistar els brawlers: " + e.getMessage());
+                    Vista.mostrarMissatge("Error al copiar les taules: " + e.getMessage());
+                }
+                toranaramostrarmenu();
+                break;
+        }
+    }
+
+    public static void switchCopiaJson(){
+        Connection conexio = DBConnection.getConnexio();
+        switch (opcio) {
+            case 0:
+                toranaramostrarmenu();
+                break;
+            case 1:
+                try {
+                    ArrayList<Brawlers> brawlersArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.convertirObjectesI(EndPointController.llegirJson())));
+                    SQLiteBrawlersDAO.crearParcialJson(conexio, brawlersArrayList);
+                    ArrayList<Gadgets> gadgetsArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.obtenirGadgetsI(EndPointController.llegirJson())));
+                    SQLiteGadgetsDAO.crearParcial(conexio, gadgetsArrayList);
+                    ArrayList<StarPowers> starPowersArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.obtenirStarPowersI(EndPointController.llegirJson())));
+                    SQLiteStarPowersDAO.crearParcial(conexio, starPowersArrayList);
+                    Vista.mostrarMissatge("Pulsa enter per continuar...");
+                    scan.nextLine();
+                } catch (Exception e){
+                    Vista.mostrarMissatge("Error al copiar les taules: " + e.getMessage());
+                }
+                toranaramostrarmenu();
+                break;
+            case 2:
+                try {
+                    ArrayList<Brawlers> brawlersArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.convertirObjectesI(EndPointController.llegirJson())));
+                    SQLiteBrawlersDAO.crearTotalJson(conexio, brawlersArrayList);
+                    ArrayList<Gadgets> gadgetsArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.obtenirGadgetsI(EndPointController.llegirJson())));
+                    SQLiteGadgetsDAO.crearTotal(conexio, gadgetsArrayList);
+                    ArrayList<StarPowers> starPowersArrayList = new ArrayList<>(Objects.requireNonNull(EndPointController.obtenirStarPowersI(EndPointController.llegirJson())));
+                    SQLiteStarPowersDAO.crearTotal(conexio, starPowersArrayList);
+                    Vista.mostrarMissatge("Pulsa enter per continuar...");
+                    scan.nextLine();
+                } catch (Exception e){
+                    Vista.mostrarMissatge("Error al copiar les taules: " + e.getMessage());
                 }
                 toranaramostrarmenu();
                 break;

@@ -87,10 +87,38 @@ public class EndPointController {
         return "Alguna cosa ha sortit malament";
     }
 
-    public static void convertirObjectesI(String json) {
+    public static void llistarBrawlerIDJ(String json, int ID) {
         Gson gson = new Gson();
         JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
         JsonArray brawlersArray = jsonObject.getAsJsonArray("items");
+
+        for (JsonElement element : brawlersArray) {
+            try {
+                Brawlers brawler = gson.fromJson(element, Brawlers.class);
+                brawler.extractIdsFromLists();
+
+                if (brawler.getId() == ID) {
+                    Vista.mostrarMissatge("ID: " + brawler.getId() +
+                            " | Nom: " + brawler.getNom() +
+                            " | Gadget1ID: " + brawler.getGadgetID() +
+                            " | Gadget2ID: " + brawler.getGadget2ID() +
+                            " | StarPower1ID: " + brawler.getStarpower1ID() +
+                            " | StarPower2ID: " + brawler.getStarpower2ID());
+                }
+
+            } catch (JsonSyntaxException e) {
+                Vista.mostrarMissatge("Error al deserialitzar el brawler: " + e.getMessage());
+            } catch (NullPointerException e) {
+                Vista.mostrarMissatge("Error: un dels camps es null.");
+            }
+        }
+    }
+
+    public static ArrayList<Brawlers> convertirObjectesI(String json) {
+        Gson gson = new Gson();
+        JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
+        JsonArray brawlersArray = jsonObject.getAsJsonArray("items");
+        ArrayList<Brawlers> brawlersList = new ArrayList<>();
 
         for (JsonElement element : brawlersArray) {
             try {
@@ -102,12 +130,14 @@ public class EndPointController {
                         " | Gadget2ID: " + brawler.getGadget2ID() +
                         " | StarPower1ID: " + brawler.getStarpower1ID() +
                         " | StarPower2ID: " + brawler.getStarpower2ID());
+                brawlersList.add(brawler);
             } catch (JsonSyntaxException e) {
                 Vista.mostrarMissatge("Error al deserialitzar el brawler: " + e.getMessage());
             } catch (NullPointerException e) {
                 Vista.mostrarMissatge("Error: un dels camps es null.");
             }
         }
+        return brawlersList;
     }
 
     public static ArrayList<Brawlers> convertirObjectesL(String json) {
@@ -227,6 +257,27 @@ public class EndPointController {
         return gadgets;
     }
 
+    public static ArrayList<Gadgets> obtenirGadgetsI(String json) {
+        Gson gson = new Gson();
+        JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
+        JsonArray brawlersArray = jsonObject.getAsJsonArray("items");
+        ArrayList<Gadgets> gadgets = new ArrayList<>();
+
+        for (JsonElement element : brawlersArray) {
+            JsonArray gadgetsArray = element.getAsJsonObject().getAsJsonArray("gadgets");
+
+            for (JsonElement gadgetElement : gadgetsArray) {
+                Gadgets gadget = gson.fromJson(gadgetElement, Gadgets.class);
+
+                // Evitar duplicats
+                if (!gadgets.contains(gadget)) {
+                    gadgets.add(gadget);
+                }
+            }
+        }
+
+        return gadgets;
+    }
 
     public static ArrayList<StarPowers> obtenirStarPowers(String json) {
         Gson gson = new Gson();
@@ -250,5 +301,25 @@ public class EndPointController {
         return starPowers;
     }
 
+    public static ArrayList<StarPowers> obtenirStarPowersI(String json) {
+        Gson gson = new Gson();
+        JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
+        JsonArray brawlersArray = jsonObject.getAsJsonArray("items");
+        ArrayList<StarPowers> starPowers = new ArrayList<>();
 
+        for (JsonElement element : brawlersArray) {
+            JsonArray starPowersArray = element.getAsJsonObject().getAsJsonArray("starPowers");
+
+            for (JsonElement starPowerElement : starPowersArray) {
+                StarPowers starPower = gson.fromJson(starPowerElement, StarPowers.class);
+
+                // Evitar duplicats
+                if (!starPowers.contains(starPower)) {
+                    starPowers.add(starPower);
+                }
+            }
+        }
+
+        return starPowers;
+    }
 }

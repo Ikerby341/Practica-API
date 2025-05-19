@@ -44,6 +44,38 @@ public class SQLiteBrawlersDAO {
         }
     }
 
+    public static void crearTotalJson(Connection con, ArrayList<Brawlers> o) {
+        if (o.get(0) != null) {
+            try (Statement stmt = con.createStatement()) {
+                int rowsAffected = stmt.executeUpdate("DELETE FROM brawlers");
+                if (rowsAffected > 0) {
+                    System.out.println("La taula brawlers ha sigut eliminada amb éxit.");
+                } else {
+                    System.out.println("No s'ha pogut eliminar la taula brawlers.");
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException("Error al eliminar la taula", e);
+            }
+            for(int i = 0; i < o.size(); i++) {
+                String sql = "INSERT INTO brawlers (brawler_id, nom, gadget1_id, gadget2_id, starpower1_id, starpower2_id) VALUES (?, ?, ?, ?, ?, ?)";
+                try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+                    pstmt.setInt(1, o.get(i).getId());
+                    pstmt.setString(2, o.get(i).getNom());
+                    pstmt.setInt(3, o.get(i).getGadgetID());
+                    pstmt.setInt(4, o.get(i).getGadget2ID());
+                    pstmt.setInt(5, o.get(i).getStarpower1ID());
+                    pstmt.setInt(6, o.get(i).getStarpower2ID());
+                    pstmt.executeUpdate();
+                    Vista.mostrarMissatge("Registre insertat correctament.");
+                } catch (SQLException e) {
+                    System.err.println("Error al insertar en la base de dades: " + e.getMessage());
+                }
+            }
+        } else {
+            throw new IllegalArgumentException("L'objecte proporcionat no es una instancia de Brawlers.");
+        }
+    }
+
     public static void crearParcial(Connection con, ArrayList<Brawlers> o) {
         int ou;
         for (int i = 0; i < o.size(); i++) {
@@ -71,7 +103,38 @@ public class SQLiteBrawlersDAO {
                         System.err.println("Error al insertar en la base de dades: " + e.getMessage());
                     }
                 }
+            } else {
+                throw new IllegalArgumentException("L'objecte proporcionat no es una instancia de Brawlers.");
+            }
+        }
+    }
 
+    public static void crearParcialJson(Connection con, ArrayList<Brawlers> o) {
+        int ou;
+        for (int i = 0; i < o.size(); i++) {
+            if (o.get(i) != null) {
+                try (Statement stmt = con.createStatement()) {
+                    String sql = "SELECT COUNT(*) FROM brawlers WHERE brawler_id = " + o.get(i).getId();
+                    ResultSet rs = stmt.executeQuery(sql);
+                    ou = rs.getInt(1);
+                } catch (SQLException e) {
+                    throw new RuntimeException("Error al actualitzar la base de dades", e);
+                }
+                if (ou == 0) {
+                    String sql = "INSERT INTO brawlers (brawler_id, nom, gadget1_id, gadget2_id, starpower1_id, starpower2_id) VALUES (?, ?, ?, ?, ?, ?)";
+                    try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+                        pstmt.setInt(1, o.get(i).getId());
+                        pstmt.setString(2, o.get(i).getNom());
+                        pstmt.setInt(3, o.get(i).getGadgetID());
+                        pstmt.setInt(4, o.get(i).getGadget2ID());
+                        pstmt.setInt(5, o.get(i).getStarpower1ID());
+                        pstmt.setInt(6, o.get(i).getStarpower2ID());
+                        pstmt.executeUpdate();
+                        Vista.mostrarMissatge("Registre insertat correctament.");
+                    } catch (SQLException e) {
+                        System.err.println("Error al insertar en la base de dades: " + e.getMessage());
+                    }
+                }
             } else {
                 throw new IllegalArgumentException("L'objecte proporcionat no es una instancia de Brawlers.");
             }
