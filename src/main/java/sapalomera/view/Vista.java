@@ -3,7 +3,7 @@ package sapalomera.view;
 public class Vista {
     /**
      * Funció per mostrar els titols
-     * @param titol El titol a mostrar
+     * @param name El titol a mostrar
      */
     public static void mostrarTitol(String name) {
         String barras = "";

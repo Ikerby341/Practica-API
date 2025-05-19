@@ -1,6 +1,5 @@
 package sapalomera.controller;
 
-import sapalomera.Main;
 import sapalomera.model.dao.*;
 import sapalomera.model.dao.SQLite.SQLiteBrawlersDAO;
 import sapalomera.model.dao.SQLite.SQLiteGadgetsDAO;
@@ -33,7 +32,7 @@ public class MenusController {
                 }
                 Vista.mostrarMissatge("Pulsa enter per continuar...");
                 scan.nextLine();
-                toranaramostrarmenu();
+                tornarAMostrarMenu();
                 break;
             case 2:
                 try {
@@ -43,7 +42,7 @@ public class MenusController {
                 }
                 Vista.mostrarMissatge("Pulsa enter per continuar...");
                 scan.nextLine();
-                toranaramostrarmenu();
+                tornarAMostrarMenu();
                 break;
             case 3:
                 try {
@@ -55,7 +54,7 @@ public class MenusController {
                         Vista.mostrarMissatge("No existeix el brawler amb ID a la BBDD: " + ID);
                         Vista.mostrarMissatge("Pulsa enter per continuar...");
                         scan.nextLine();
-                        toranaramostrarmenu();
+                        tornarAMostrarMenu();
                         break;
                     }
                     EndPointController.convertirObjecte(EndPointController.llistarBrawlerID(ID));
@@ -75,13 +74,13 @@ public class MenusController {
                 }
                 Vista.mostrarMissatge("Pulsa enter per continuar...");
                 scan.nextLine();
-                toranaramostrarmenu();
+                tornarAMostrarMenu();
                 break;
             case 4:
                 Vista.mostrarSubMenuCopia();
                 scanOpcio(2);
                 switchCopia();
-                toranaramostrarmenu();
+                tornarAMostrarMenu();
                 break;
             case 5:
                 try {
@@ -91,7 +90,7 @@ public class MenusController {
                 }
                 Vista.mostrarMissatge("Pulsa enter per continuar...");
                 scan.nextLine();
-                toranaramostrarmenu();
+                tornarAMostrarMenu();
                 break;
             case 6:
                 try {
@@ -103,7 +102,7 @@ public class MenusController {
                         Vista.mostrarMissatge("No existeix el brawler amb ID a la BBDD: " + ID);
                         Vista.mostrarMissatge("Pulsa enter per continuar...");
                         scan.nextLine();
-                        toranaramostrarmenu();
+                        tornarAMostrarMenu();
                         break;
                     }
                     EndPointController.llistarBrawlerIDJ(EndPointController.llegirJson(),ID);
@@ -123,13 +122,13 @@ public class MenusController {
                 }
                 Vista.mostrarMissatge("Pulsa enter per continuar...");
                 scan.nextLine();
-                toranaramostrarmenu();
+                tornarAMostrarMenu();
                 break;
             case 7:
                 Vista.mostrarSubMenuCopia();
                 scanOpcio(2);
                 switchCopiaJson();
-                toranaramostrarmenu();
+                tornarAMostrarMenu();
                 break;
             case 8:
                 Vista.mostrarMissatge(EndPointController.llegirGsonBrawlStars());
@@ -140,7 +139,7 @@ public class MenusController {
                 }
                 Vista.mostrarMissatge("Pulsa enter per continuar...");
                 scan.nextLine();
-                toranaramostrarmenu();
+                tornarAMostrarMenu();
                 break;
         }
     }
@@ -160,7 +159,7 @@ public class MenusController {
         }
     }
 
-    public static void toranaramostrarmenu(){
+    public static void tornarAMostrarMenu(){
         Connection conexio = DBConnection.getConnexio();
         Vista.mostrarMenuPrincipal();
         MenusController.scanOpcio(8);
@@ -171,7 +170,7 @@ public class MenusController {
         Connection conexio = DBConnection.getConnexio();
         switch (opcio) {
             case 0:
-                toranaramostrarmenu();
+                tornarAMostrarMenu();
                 break;
             case 1:
                 try {
@@ -188,7 +187,7 @@ public class MenusController {
                 } catch (Exception e){
                     Vista.mostrarMissatge("Error al copiar les taules: " + e.getMessage());
                 }
-                toranaramostrarmenu();
+                tornarAMostrarMenu();
                 break;
             case 2:
                 try {
@@ -205,7 +204,7 @@ public class MenusController {
                 } catch (Exception e){
                     Vista.mostrarMissatge("Error al copiar les taules: " + e.getMessage());
                 }
-                toranaramostrarmenu();
+                tornarAMostrarMenu();
                 break;
         }
     }
@@ -214,7 +213,7 @@ public class MenusController {
         Connection conexio = DBConnection.getConnexio();
         switch (opcio) {
             case 0:
-                toranaramostrarmenu();
+                tornarAMostrarMenu();
                 break;
             case 1:
                 try {
@@ -229,7 +228,7 @@ public class MenusController {
                 } catch (Exception e){
                     Vista.mostrarMissatge("Error al copiar les taules: " + e.getMessage());
                 }
-                toranaramostrarmenu();
+                tornarAMostrarMenu();
                 break;
             case 2:
                 try {
@@ -244,7 +243,7 @@ public class MenusController {
                 } catch (Exception e){
                     Vista.mostrarMissatge("Error al copiar les taules: " + e.getMessage());
                 }
-                toranaramostrarmenu();
+                tornarAMostrarMenu();
                 break;
         }
     }
