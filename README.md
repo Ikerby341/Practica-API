@@ -23,3 +23,9 @@ En canvi, si hauria moltes consultes i instancies a la vegada, llavors si fa fal
 - 『Gadgets』․ Gestionem els gadgets que té el personaje (Només té 2 máxims cada personatje)
 - 『Rarity』․ Gestionem el tipus de rareza que és el personatje (Cómun, Raro, Super raro, Epico, Mitico, Legendario)
 - 『StarPowers』․ Gestionem les habilitats finals dels personatjes (`La Ultimate` per als gamers)
+
+### ~ CÒPIA TOTAL ` 📙 `
+> [!NOTE]
+> En la còpia complerta del `JSON` eliminem la `rareza`, perquè encara que a la BBDD tinguem una `ID especifica` no podem asegurar-nos que el personatge
+> un cop eliminat tindrá la mateixa posició amb la `mateixa ID` i aixó ens quedaría amb dades **INCONCISTENTS**. Per aixó preferim borrar tots els registres i si vol tornar
+> a obtenir la `rareza` que es faci una còpia complerta amb el `endpoint`.
