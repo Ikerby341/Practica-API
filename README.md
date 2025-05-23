@@ -29,3 +29,10 @@ En canvi, si hauria moltes consultes i instancies a la vegada, llavors si fa fal
 > En la còpia complerta del `JSON` eliminem la `rareza`, perquè encara que a la BBDD tinguem una `ID especifica` no podem asegurar-nos que el personatge
 > un cop eliminat tindrá la mateixa posició amb la `mateixa ID` i aixó ens quedaría amb dades **INCONCISTENTS**. Per aixó preferim borrar tots els registres i si vol tornar
 > a obtenir la `rareza` que es faci una còpia complerta amb el `endpoint`.
+
+
+### ~ CONTROL DE CAMPS `  `
+> [!NOTE]
+> A l'hora de afegir els camps de les `ids` dins dels brawlers com el `gadget_id`, en cas de no trobar-ho posem `-1` a la BBDD, en cas d'observar algún `-1` significa que alguna cosa `no ha sortit bé` a l'hora de afagar informació del `json` o l'`endpoint`.
+
+![image](https://github.com/user-attachments/assets/1fd77726-02c6-4f76-b28b-dcca09362e53)
