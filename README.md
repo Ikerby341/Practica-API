@@ -31,7 +31,7 @@ En canvi, si hauria moltes consultes i instancies a la vegada, llavors si fa fal
 > a obtenir la `rareza` que es faci una còpia complerta amb el `endpoint`.
 
 
-### ~ CONTROL DE CAMPS `  `
+### ~ CONTROL DE CAMPS ` 🚨 `
 > [!NOTE]
 > A l'hora de afegir els camps de les `ids` dins dels brawlers com el `gadget_id`, en cas de no trobar-ho posem `-1` a la BBDD, en cas d'observar algún `-1` significa que alguna cosa `no ha sortit bé` a l'hora de afagar informació del `json` o l'`endpoint`.
 
